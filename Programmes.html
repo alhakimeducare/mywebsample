@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Programmes</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'], // Set Poppins as default font
+                    },
+                },
+            },
+        };
+    </script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/rippleui@1.12.1/dist/css/styles.css"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+</head>
+<body class="font-sans bg-[#fff6ee]">
+
+<!-- Navbar -->
+<header class="bg-white py-4 shadow-md fixed top-0 left-0 w-full z-50">
+    <div class="container mx-auto flex justify-between items-center px-6">
+        <!-- Logo -->
+        <div class="flex items-center">
+            <img src="image/logo al hakim.jpg" alt="Al Hakim Education Centre Logo" class="h-12 w-auto">
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button id="menu-toggle" class="lg:hidden block text-blue-900 focus:outline-none">
+            <svg id="menu-icon" class="w-6 h-6 transition-transform duration-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-8 6h8" />
+            </svg>
+        </button>
+
+        <!-- Navigation Menu -->
+        <nav id="menu" class="hidden lg:flex space-x-8 text-lg">
+            <a href="homepage.html" class="nav-link relative text-black font-normal hover:text-blue-400 px-4 py-2 transition duration-300">Home</a>
+            <a href="Programmes.html" class="nav-link relative text-black font-normal hover:text-blue-400 px-4 py-2 transition duration-300">Programmes</a>
+            <a href="location.html" class="nav-link relative text-black font-normal hover:text-blue-400 px-4 py-2 transition duration-300">Location</a>
+            <a href="#" id="enroll-btn" class="nav-link bg-blue-900 text-white px-4 py-2 rounded-full font-semibold hover:bg-blue-700 transition duration-300">Enroll</a>
+        </nav>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden lg:hidden bg-white shadow-md">
+        <nav class="flex flex-col items-center space-y-4 py-4">
+            <a href="homepage.html" class="mobile-nav-link text-gray-600 font-semibold">Home</a>
+            <a href="Programmes.html" class="mobile-nav-link text-gray-600 font-semibold hover:text-blue-900">Programmes</a>
+            <a href="location.html" class="mobile-nav-link text-gray-600 font-semibold hover:text-blue-900">Location</a>
+            <a href="#" id="enroll-btn" class="bg-blue-900 text-white px-4 py-2 rounded-full font-semibold hover:bg-blue-700">Enroll</a>
+        </nav>
+    </div>
+
+    <button id="go-up-btn" class="hidden fixed bottom-5 right-5 bg-blue-900 text-white p-3 rounded-full shadow-md hover:bg-blue-700 transition duration-300 z-50">
+        &#8679;
+    </button>
+    
+    <script>
+        document.getElementById("enroll-btn").addEventListener("click", function (event) {
+            event.preventDefault(); // Prevent default link behavior
+            document.getElementById("enrollment-section").scrollIntoView({ behavior: "smooth" });
+        });
+
+        // Get the current page URL (case insensitive)
+        const currentPage = window.location.pathname.split("/").pop().toLowerCase();
+        console.log("Current Page:", currentPage); // Debugging
+
+        const navLinks = document.querySelectorAll(".nav-link");
+        const mobileNavLinks = document.querySelectorAll(".mobile-nav-link");
+
+        // Highlight the active link in the desktop navbar
+        navLinks.forEach(link => {
+            if (link.getAttribute("href").toLowerCase() === currentPage) {
+                link.classList.add("text-blue-400");
+                link.innerHTML += '<span class="absolute left-0 bottom-0 w-full h-1 bg-blue-400"></span>';
+            }
+        });
+
+        // Highlight the active link in the mobile menu
+        mobileNavLinks.forEach(link => {
+            if (link.getAttribute("href").toLowerCase() === currentPage) {
+                link.classList.add("text-blue-400");
+            }
+        });
+
+        // Mobile menu toggle animation
+        const menuToggle = document.getElementById("menu-toggle");
+        const menuIcon = document.getElementById("menu-icon");
+        const mobileMenu = document.getElementById("mobile-menu");
+        
+        menuToggle.addEventListener("click", function() {
+            mobileMenu.classList.toggle("hidden");
+            menuIcon.classList.toggle("rotate-90");
+            if (mobileMenu.classList.contains("hidden")) {
+                menuIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-8 6h8" />';
+            } else {
+                menuIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />';
+            }
+        });
+
+        // Go Up Button Functionality
+        const goUpBtn = document.getElementById("go-up-btn");
+        window.addEventListener("scroll", function () {
+            if (window.scrollY > 200) {
+                goUpBtn.classList.remove("hidden");
+            } else {
+                goUpBtn.classList.add("hidden");
+            }
+        });
+
+        goUpBtn.addEventListener("click", function () {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+    </script>
+</header>
+
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const boxes = document.querySelectorAll(".box");
+        
+        boxes.forEach((box) => {
+            box.addEventListener("mouseenter", () => {
+                boxes.forEach((b) => {
+                    if (b !== box) {
+                        b.classList.add("opacity-40"); // Dim other cards
+                    }
+                });
+            });
+    
+            box.addEventListener("mouseleave", () => {
+                boxes.forEach((b) => {
+                    b.classList.remove("opacity-40"); // Reset opacity
+                });
+            });
+        });
+    });
+    </script>
+
+    <!-- Hero Section -->
+    <section class="relative w-full">
+        <div class="relative w-full min-h-[450px] md:min-h-[550px] lg:min-h-[670px] overflow-hidden">
+            <img src="image/baby5.jpg" alt="Hero Image" class="absolute inset-0 w-full h-full object-cover">
+            <div class="absolute inset-0 bg-black/40 flex flex-col items-start text-white px-6 sm:px-12 md:px-16 lg:px-24 pt-20 md:pt-28">
+                <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight">
+                    Which category is for<br class="hidden md:block"> my child?
+                </h1>
+                <p class="text-lg sm:text-xl md:text-2xl mt-6 sm:mt-8 md:mt-10 leading-relaxed">
+                    At Al Hakim, we offer a tailored programme best for their ages.<br class="hidden sm:block">
+                    Each category has activities that focus on how to make them <br class="hidden sm:block">
+                    always learn and grow in the best way.
+                </p>
+            </div>
+        </div>
+    </section>
+    
+
+
+<!-- Programmes Section -->
+<section class="min-h-screen flex flex-col items-center justify-center p-8 space-y-16 bg-pattern">
+    <div class="w-[300px] h-[370px] sm:w-[350px] sm:h-[450px] md:w-[400px] md:h-[500px] lg:w-[390px] lg:h-[490px] xl:w-[400px] xl:h-[500px] 
+    grid grid-cols-2 grid-rows-2 gap-[30px] text-white relative overflow-visible z-10">
+
+        <!-- Card 1: Little Owl -->
+        <div class="programme-card bg-[#c7c7ff] rounded-[20px] flex flex-col items-center justify-center relative p-6 text-center
+                    shadow-lg shadow-[#8c8cff] overflow-hidden transition-all duration-500 hover:scale-150 hover:rotate-[360deg] hover:z-50">
+            <!-- Image & Title -->
+            <div class="absolute inset-0 flex flex-col items-center justify-center transition-all duration-500 ease-in-out hover:blur-md">
+                <img src="image/hatch.png" alt="Little Owl" class="w-20 sm:w-24 h-20 sm:h-24 transition-all duration-500">
+                <h3 class="sm:text-[16px] md:text-[16px] lg:text-[18px] font-semibold text-[#5A5AE6] mt-2">Little Owl</h3>
+            </div>
+
+            <!-- Info (Hidden, Appears on Hover) -->
+            <div class="absolute inset-0 flex flex-col items-center justify-center p-4 text-gray-900 bg-white bg-opacity-80 opacity-0 transition-all duration-500 hover:opacity-100">
+                <p class="text-[12px] sm:text-[16px] md:text-[18px] lg:text-[20px] font-bold">3 to 12 months</p>
+                <p class="text-[10px] sm:text-[14px] md:text-[16px] mt-1 text-gray-700">Focus on sensory stimulation, bonding, and motor skills.</p>
+                <p class="text-[10px] sm:text-[10px] md:text-[10px] font-semibold text-gray-900 mt-2">Activities:</p>
+                <ul class="list-disc text-[8px] sm:text-[8px] md:text-[9px] text-gray-800 mt-1 text-left">
+                    <li>Tummy time</li>
+                    <li>Baby gym</li>
+                    <li>Massage</li>
+                    <li>Soft toys play</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Card 2: Tiny Tots -->
+        <div class="programme-card bg-[#ffd8be] rounded-[20px] flex flex-col items-center justify-center relative p-6 text-center
+                    shadow-lg shadow-[#ffae7a] overflow-hidden transition-all duration-500 hover:scale-150 hover:rotate-[360deg] hover:z-50">
+            <div class="absolute inset-0 flex flex-col items-center justify-center transition-all duration-500 ease-in-out hover:blur-md">
+                <img src="image/bottle.png" alt="Tiny Tots" class="w-20 sm:w-24 h-20 sm:h-24 transition-all duration-500">
+                <h3 class="sm:text-[16px] md:text-[16px] lg:text-[18px] font-semibold text-[#FC8147] mt-2">Tiny Tots</h3>
+            </div>
+
+            <div class="absolute inset-0 flex flex-col items-center justify-center p-4 text-gray-900 bg-white bg-opacity-80 opacity-0 transition-all duration-500 hover:opacity-100">
+                <p class="text-[12px] sm:text-[16px] md:text-[18px] lg:text-[20px] font-bold">1 year</p>
+                <p class="text-[10px] sm:text-[14px] md:text-[16px] mt-1 text-gray-700">Hands-on learning through play, basic cognitive skills, social interaction.</p>
+                <p class="text-[10px] sm:text-[10px] md:text-[10px] font-semibold text-gray-900 mt-2">Activities:</p>
+                <ul class="list-disc text-[8px] sm:text-[8px] md:text-[9px] text-gray-800 mt-1 text-left">
+                    <li>Creative play</li>
+                    <li>Basic counting</li>
+                    <li>Storytelling</li>
+                    <li>Role play</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Card 3: Awesome Kids -->
+        <div class="programme-card bg-[#a9ecbf] rounded-[20px] flex flex-col items-center justify-center relative p-6 text-center
+                    shadow-lg shadow-[#75d18d] overflow-hidden transition-all duration-500 hover:scale-150 hover:rotate-[360deg] hover:z-50">
+            <div class="absolute inset-0 flex flex-col items-center justify-center transition-all duration-500 ease-in-out hover:blur-md">
+                <img src="image/pallet.png" alt="Awesome Kids" class="w-20 sm:w-24 h-20 sm:h-24 transition-all duration-500">
+                <h3 class="sm:text-[16px] md:text-[16px] lg:text-[18px] font-semibold text-[#42A650] mt-2">Awesome Kids</h3>
+            </div>
+
+            <div class="absolute inset-0 flex flex-col items-center justify-center p-4 text-gray-900 bg-white bg-opacity-80 opacity-0 transition-all duration-500 hover:opacity-100">
+                <p class="text-[12px] sm:text-[16px] md:text-[18px] lg:text-[20px] font-bold">2 years</p>
+                <p class="text-[10px] sm:text-[12px] md:text-[15px] mt-1 text-gray-700">Encouraging first steps, communication, and basic independence.</p>
+                <p class="text-[10px] sm:text-[10px] md:text-[10px] font-semibold text-gray-900 mt-2">Activities:</p>
+                <ul class="list-disc text-[8px] sm:text-[8px] md:text-[9px] text-gray-800 mt-1 text-left">
+                    <li>Flashcards</li>
+                    <li>Sensory play</li>
+                    <li>Baby spa</li>
+                    <li>Music & movement</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Card 4: Amazing Kids -->
+        <div class="programme-card bg-[#f3bbe1] rounded-[20px] flex flex-col items-center justify-center relative p-6 text-center
+                    shadow-lg shadow-[#e78ac4] overflow-hidden transition-all duration-500 hover:scale-150 hover:rotate-[360deg] hover:z-50">
+            <div class="absolute inset-0 flex flex-col items-center justify-center transition-all duration-500 ease-in-out hover:blur-md">
+                <img src="image/star.png" alt="Amazing Kids" class="w-20 sm:w-24 h-20 sm:h-24 transition-all duration-500">
+                <h3 class="sm:text-[16px] md:text-[16px] lg:text-[18px] font-semibold text-[#D936A6] mt-2">Amazing Kids</h3>
+            </div>
+
+            <div class="absolute inset-0 flex flex-col items-center justify-center p-4 text-gray-900 bg-white bg-opacity-80 opacity-0 transition-all duration-500 hover:opacity-100">
+                <p class="text-[12px] sm:text-[16px] md:text-[18px] lg:text-[20px] font-bold">3 & 4 years</p>
+                <p class="text-[8px] sm:text-[12px] md:text-[14px] mt-1 text-gray-700">Preparing for structured learning, emotional development, and creativity.</p>
+                <p class="text-[10px] sm:text-[10px] md:text-[10px] font-semibold text-gray-900 mt-2">Activities:</p>
+                <ul class="list-disc text-[8px] sm:text-[8px] md:text-[9px] text-gray-800 mt-1 text-left">
+                    <li>Early literacy</li>
+                    <li>Teamwork</li>
+                    <li>Theme-based learning</li>
+                    <li>Exploration</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</section>
+        <style>
+            .programme-card {
+            position: relative;
+            cursor: pointer;
+        }
+
+        /* Default Front & Back State */
+        .card-front {
+            transition: opacity 0.5s ease-in-out;
+        }
+        .card-back {
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        /* Show Details When Card is Clicked (Mobile) */
+        .programme-card.active .card-back {
+            opacity: 1;
+        }
+        .programme-card.active .card-front {
+            opacity: 0;
+        }
+
+        /* ✨ Short Animation on Scroll (For Mobile Users) */
+        @media (max-width: 768px) {
+            .scroll-hint {
+                animation: tilt-shake 0.8s ease-in-out;
+            }
+
+            @keyframes tilt-shake {
+                0% { transform: rotate(0deg); }
+                25% { transform: rotate(2deg); }
+                50% { transform: rotate(-2deg); }
+                75% { transform: rotate(2deg); }
+                100% { transform: rotate(0deg); }
+            }
+        }
+
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const cards = document.querySelectorAll(".programme-card");
+
+            // Scroll Animation Observer (For Mobile)
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && window.innerWidth <= 768) { 
+                        entry.target.classList.add("scroll-hint"); // Add animation class
+                        setTimeout(() => entry.target.classList.remove("scroll-hint"), 1000); // Remove after animation
+                    }
+                });
+            }, { threshold: 0.5 }); // Trigger when 50% visible
+
+            cards.forEach(card => {
+                observer.observe(card);
+
+                // Click to show info
+                card.addEventListener("click", function () {
+                    this.classList.toggle("active");
+                });
+            });
+        });
+    </script>
+        <style>
+            .bg-pattern {
+                width: 100%;
+                height: 100%;
+                --color: #E1E1E1;
+                background-color: #fff6ee;
+                background-image: linear-gradient(0deg, transparent 24%, var(--color) 25%, var(--color) 26%, transparent 27%,transparent 74%, var(--color) 75%, var(--color) 76%, transparent 77%,transparent),
+                linear-gradient(90deg, transparent 24%, var(--color) 25%, var(--color) 26%, transparent 27%,transparent 74%, var(--color) 75%, var(--color) 76%, transparent 77%,transparent);
+                background-size: 55px 55px;
+        }
+        
+        </style>
+
+
+
+
+<!-- 6 Key Development Areas -->
+<div class="text-center bg-[#fff6ee] pt-12 pb-20 px-2">
+    <!-- Heading -->
+    <h1 class="text-4xl md:text-5xl font-extrabold text-[#000000] mt-20 mb-36 opacity-0 transition-all duration-1000" id="dev-heading">
+        6 Key Development Areas
+    </h1>
+
+    <!-- Grid Container -->
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-6 gap-8 max-w-none mx-auto justify-items-center">
+        
+        <!-- Cards -->
+        <div class="relative flex flex-col items-center bg-blue-100 overflow-visible flip-card opacity-0 transform rotate-y-180 transition-all duration-1000 hover:scale-110 hover:-translate-y-3 hover:shadow-2xl hover:duration-100" data-animate>
+            <figure class="absolute -top-16 w-full flex justify-center overflow-visible">
+                <img src="image/physical.png" alt="Physical" class="w-[150px] object-contain"/>
+            </figure>
+            <div class="card-body text-center space-y-4 mt-32">
+                <h3 class="text-2xl font-bold text-[#134A96]">Physical</h3>
+                <p class="text-[#134A96] text-sm">Strength, coordination, and movement</p>
+            </div>
+        </div>
+
+        <div class="relative flex flex-col items-center bg-blue-200 overflow-visible flip-card opacity-0 transform rotate-y-180 transition-all duration-1000 delay-100 hover:scale-110 hover:-translate-y-3 hover:shadow-2xl hover:duration-100" data-animate>
+            <figure class="absolute -top-16 w-full flex justify-center overflow-visible">
+                <img src="image/cognitive.png" alt="Cognitive" class="w-[150px] object-contain"/>
+            </figure>
+            <div class="card-body text-center space-y-4 mt-32">
+                <h3 class="text-2xl font-bold text-[#0F5298]">Cognitive</h3>
+                <p class="text-[#0F5298] text-sm">Thinking, problem-solving, and curiosity</p>
+            </div>
+        </div>
+
+        <div class="relative flex flex-col items-center bg-purple-200 overflow-visible flip-card opacity-0 transform rotate-y-180 transition-all duration-1000 delay-200 hover:scale-110 hover:-translate-y-3 hover:shadow-2xl hover:duration-100" data-animate>
+            <figure class="absolute -top-16 w-full flex justify-center overflow-visible">
+                <img src="image/social.png" alt="Social" class="w-[150px] object-contain"/>
+            </figure>
+            <div class="card-body text-center space-y-4 mt-32">
+                <h3 class="text-2xl font-bold text-[#573D98]">Social</h3>
+                <p class="text-[#573D98] text-sm">Interaction, teamwork, and friendships</p>
+            </div>
+        </div>
+
+        <div class="relative flex flex-col items-center bg-orange-200 overflow-visible flip-card opacity-0 transform rotate-y-180 transition-all duration-1000 delay-300 hover:scale-110 hover:-translate-y-3 hover:shadow-2xl hover:duration-100" data-animate>
+            <figure class="absolute -top-16 w-full flex justify-center overflow-visible">
+                <img src="image/emotional.png" alt="Emotional" class="w-[150px] object-contain"/>
+            </figure>
+            <div class="card-body text-center space-y-4 mt-32">
+                <h3 class="text-2xl font-bold text-[#B94E1F]">Emotional</h3>
+                <p class="text-[#B94E1F] text-sm">Self-awareness, confidence, and self-expression</p>
+            </div>
+        </div>
+
+        <div class="relative flex flex-col items-center bg-red-200 overflow-visible flip-card opacity-0 transform rotate-y-180 transition-all duration-1000 delay-400 hover:scale-110 hover:-translate-y-3 hover:shadow-2xl hover:duration-100" data-animate>
+            <figure class="absolute -top-16 w-full flex justify-center overflow-visible">
+                <img src="image/language.png" alt="Language" class="w-[150px] object-contain"/>
+            </figure>
+            <div class="card-body text-center space-y-4 mt-32">
+                <h3 class="text-2xl font-bold text-[#B33B38]">Language</h3>
+                <p class="text-[#B33B38] text-sm">Speech, listening, and comprehension</p>
+            </div>
+        </div>
+
+        <div class="relative flex flex-col items-center bg-green-200 overflow-visible flip-card opacity-0 transform rotate-y-180 transition-all duration-1000 delay-500 hover:scale-110 hover:-translate-y-3 hover:shadow-2xl hover:duration-100" data-animate>
+            <figure class="absolute -top-16 w-full flex justify-center overflow-visible">
+                <img src="image/creative.png" alt="Creative" class="w-[150px] object-contain"/>
+            </figure>
+            <div class="card-body text-center space-y-4 mt-32">
+                <h3 class="text-2xl font-bold text-[#418C3B]">Creative</h3>
+                <p class="text-[#418C3B] text-sm">Art, music, and imaginative play</p>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Flip in when entering viewport
+                    entry.target.classList.remove("opacity-0", "rotate-y-180");
+                } else {
+                    // Flip out when leaving viewport
+                    entry.target.classList.add("opacity-0", "rotate-y-180");
+                }
+            });
+        }, { threshold: 0.2 });
+
+        document.querySelectorAll("[data-animate]").forEach(card => observer.observe(card));
+        observer.observe(document.getElementById("dev-heading"));
+    });
+</script>
+
+
+
+
+    
+
+    <!-- Monthly Learning Themes -->
+    <div class="text-center bg-[#d8f1ff] pt-32 pb-0">
+        <!-- Heading -->
+        <h1 class="text-3xl md:text-5xl font-extrabold text-[#0C1445] mb-16 opacity-0 transition-all duration-1000" id="theme-heading">
+            Monthly Learning Themes
+        </h1>
+
+        <!-- Carousel Container -->
+        <div class="carousel-wrapper">
+            <div class="carousel" id="carousel">
+
+                <!-- Months (Larger Cards) -->
+                <div class="carousel-item" data-animate>
+                    <div class="card">
+                        <img src="image/january.png" alt="January" />
+                        <h3>January</h3>
+                        <p>Myself</p>
+                    </div>
+                </div>
+
+                <div class="carousel-item" data-animate>
+                    <div class="card">
+                        <img src="image/february.png" alt="February" />
+                        <h3>February</h3>
+                        <p>My Family</p>
+                    </div>
+                </div>
+
+                <div class="carousel-item" data-animate>
+                    <div class="card">
+                        <img src="image/march.png" alt="March" />
+                        <h3>March</h3>
+                        <p>My House</p>
+                    </div>
+                </div>
+
+                <div class="carousel-item" data-animate>
+                    <div class="card">
+                        <img src="image/april.png" alt="April" />
+                        <h3>April</h3>
+                        <p>My School</p>
+                    </div>
+                </div>
+
+                <div class="carousel-item" data-animate>
+                    <div class="card">
+                        <img src="image/may.png" alt="May" />
+                        <h3>May</h3>
+                        <p>Animals</p>
+                    </div>
+                </div>
+
+                <div class="carousel-item" data-animate>
+                    <div class="card">
+                        <img src="image/june.png" alt="June" />
+                        <h3>June</h3>
+                        <p>Transportation</p>
+                    </div>
+                </div>
+
+                <div class="carousel-item" data-animate>
+                    <div class="card">
+                        <img src="image/july.png" alt="July" />
+                        <h3>July</h3>
+                        <p>occupation</p>
+                    </div>
+                </div>
+
+                <div class="carousel-item" data-animate>
+                    <div class="card">
+                        <img src="image/august.png" alt="August" />
+                        <h3>August</h3>
+                        <p>Fruits & Vegetables</p>
+                    </div>
+                </div>
+
+                <div class="carousel-item" data-animate>
+                    <div class="card">
+                        <img src="image/september.png" alt="September" />
+                        <h3>September</h3>
+                        <p>The Food We Eat</p>
+                    </div>
+                </div>
+
+                <div class="carousel-item" data-animate>
+                    <div class="card">
+                        <img src="image/october.png" alt="October" />
+                        <h3>October</h3>
+                        <p>Festival</p>
+                    </div>
+                </div>
+
+                <div class="carousel-item" data-animate>
+                    <div class="card">
+                        <img src="image/november.png" alt="November" />
+                        <h3>November</h3>
+                        <p>Season</p>
+                    </div>
+                </div>
+
+                <div class="carousel-item" data-animate>
+                    <div class="card">
+                        <img src="image/december.png" alt="December" />
+                        <h3>December</h3>
+                        <p>Weather</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Image Below the Cards (Placed Outside the .carousel) -->
+    <div class="flex justify-center mb-4 pb-10">
+        <img src="image/platform1.png" alt="Theme Background" class="w-64 h-auto">
+    </div>
+</div>
+    </div>
+
+<!-- CSS for Bigger, Cleaner 3D Carousel -->
+<style>
+    .carousel-wrapper {
+        perspective: 1500px;
+        width: 100%;
+        height: 450px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .carousel {
+        width: 300px;
+        height: 300px;
+        position: relative;
+        transform-style: preserve-3d;
+        transition: transform 1s ease-in-out;
+    }
+
+    .carousel-item {
+        width: 240px;
+        height: 240px;
+        position: absolute;
+        transform-origin: center;
+    }
+
+    /* Larger & Cleaner Card Styling */
+    .card {
+        background: white;
+        border-radius: 15px;
+        padding: 20px;
+        box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.15);
+        text-align: center;
+        width: 220px;
+        height: 220px;
+    }
+
+    .card img {
+    width: 120px; /* Set a fixed width */
+    height: 120px; /* Set a fixed height */
+    object-fit: contain; /* Ensures the image fits within the box */
+    display: block; /* Ensures proper spacing */
+    margin: 0 auto; /* Centers the image */
+}
+
+.card h3 {
+    font-size: 18px;
+    margin-top: 10px;
+    font-weight: bold;
+    color: black; /* Set text color to black */
+}
+
+.card h3 {
+    font-size: 18px;
+    margin-top: 10px;
+    font-weight: bold;
+    color: black; /* Set text color to black */
+}
+
+.card p {
+    font-size: 14px;
+    color: black; /* Set text color to black */
+}
+
+
+
+    .card p {
+        font-size: 14px;
+        color: gray;
+    }
+
+    .carousel-btn {
+        background-color: #0C1445;
+        color: white;
+        border: none;
+        padding: 12px 18px;
+        font-size: 22px;
+        cursor: pointer;
+        margin: 15px;
+        border-radius: 8px;
+    }
+
+    .carousel-btn:hover {
+        background-color: #1F2A66;
+    }
+</style>
+
+<!-- JavaScript for Smooth 3D Carousel -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+    const carousel = document.getElementById("carousel");
+    const items = document.querySelectorAll(".carousel-item");
+
+    let angle = 0; 
+    let speed = 0.7 ;  // 🔹 Start slow (Lower = Slower)
+    let maxSpeed = 0.7;  // 🔹 Set your max speed
+    let rotating = true; 
+
+    const totalItems = items.length;
+    const rotationAngle = 360 / totalItems;
+
+        // Position items in a circular pattern
+        items.forEach((item, index) => {
+            const theta = index * rotationAngle;
+            item.style.transform = `rotateY(${theta}deg) translateZ(450px)`;
+        });
+
+        // Function for smooth rotation
+        function smoothRotate() {
+            angle -= speed; // 🔹 Decrease for clockwise, increase for counterclockwise
+            carousel.style.transform = `rotateY(${angle}deg)`;
+            requestAnimationFrame(smoothRotate); // 🔹 Keeps the animation running
+        }
+
+        // Start smooth rotation
+        smoothRotate();
+
+        // Observer for Fade-in Animation
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("opacity-100", "translate-y-0");
+                } else {
+                    entry.target.classList.remove("opacity-100", "translate-y-0");
+                }
+            });
+        }, { threshold: 0.2 });
+
+        document.querySelectorAll("[data-animate]").forEach(card => observer.observe(card));
+        observer.observe(document.getElementById("theme-heading"));
+    });
+</script>
+
+
+
+
+<!-- Accordion Section -->
+<div class="p-28 space-y-8 max-w-full mx-auto mt-0 opacity-0 translate-y-10 transition-all duration-1000" data-animate>
+    <!-- Accordion Item 1: Operating Hours -->
+    <div class="bg-white rounded-lg shadow-md overflow-hidden">
+        <div class="accordion-header flex justify-between items-center p-8 bg-[#d8f1ff] hover:bg-[#005fa8] text-black hover:text-white transition-all duration-300 cursor-pointer">
+            <h3 class="font-semibold text-lg">Operating Hours</h3>
+            <span class="icon text-xl font-bold transition-transform duration-300">+</span>
+        </div>
+        <div class="accordion-content max-h-0 overflow-hidden transition-all duration-300 ease-out">
+            <div class="p-5 pt-4">
+                <table class="w-full border-collapse">
+                    <tr class="border-b">
+                        <td class="py-2 font-medium text-black">Full Day</td>
+                        <td class="py-2 text-gray-700">7 AM - 6 PM</td>
+                    </tr>
+                    <tr class="border-b">
+                        <td class="py-2 font-medium text-black">Half Day (Morning)</td>
+                        <td class="py-2 text-gray-700">7 AM - 1 PM</td>
+                    </tr>
+                    <tr class="border-b">
+                        <td class="py-2 font-medium text-black">Half Day (Afternoon)</td>
+                        <td class="py-2 text-gray-700">12 PM - 6 PM</td>
+                    </tr>
+                    <tr>
+                        <td class="py-2 font-medium text-black">Overtime Rate</td>
+                        <td class="py-2 text-gray-700">RM 15/Hour</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Accordion Item 2: Registration Requirements -->
+    <div class="bg-white rounded-lg shadow-md overflow-hidden">
+        <div class="accordion-header flex justify-between items-center p-8 bg-[#d8f1ff] hover:bg-[#005fa8] text-black hover:text-white transition-all duration-300 cursor-pointer">
+            <h3 class="font-semibold text-lg">Registration Requirements</h3>
+            <span class="icon text-xl font-bold transition-transform duration-300">+</span>
+        </div>
+        <div class="accordion-content max-h-0 overflow-hidden transition-all duration-300 ease-out">
+            <div class="p-5 pt-4">
+                <p class="font-medium text-black">🔍 Required Documents:</p>
+                <ul class="list-disc list-inside text-gray-700 mt-2 space-y-1">
+                    <li>👨‍👧‍👦 Photocopy of MyKid & Birth Certificate</li>
+                    <li>🎬 4 Passport-Sized Photos</li>
+                    <li>👤 Photocopy of Parents' MyCard</li>
+                    <li>💉 Photocopy of Immunization Card</li>
+                    <li>🌍 Photocopy of COVID-19 Vaccination Certificate (Parents)</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Accordion Item 3: Document Preparation -->
+    <div class="bg-white rounded-lg shadow-md overflow-hidden">
+        <div class="accordion-header flex justify-between items-center p-8 bg-[#d8f1ff] hover:bg-[#005fa8] text-black hover:text-white transition-all duration-300 cursor-pointer">
+            <h3 class="font-semibold text-lg">Document Preparation</h3>
+            <span class="icon text-xl font-bold transition-transform duration-300">+</span>
+        </div>
+        <div class="accordion-content max-h-0 overflow-hidden transition-all duration-300 ease-out">
+            <div class="p-5 pt-4">
+                <p class="text-gray-700">📚 Ensure all documents are complete before submission.</p>
+                <p class="mt-2 text-gray-700">📞 Before and after preparing the documents, please contact us via WhatsApp to verify if you have all the required files.</p>
+                <p class="mt-2 text-gray-700">👥 <span class="font-medium">Contact us on WhatsApp:</span> <a href="https://wa.me/your-number" class="text-blue-600 font-semibold underline">Click here</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // JavaScript for accordion functionality
+    document.querySelectorAll('.accordion-header').forEach(header => {
+        header.addEventListener('click', () => {
+            const content = header.nextElementSibling;
+            const icon = header.querySelector('.icon');
+            const allContents = document.querySelectorAll('.accordion-content');
+            const allIcons = document.querySelectorAll('.icon');
+
+            // Close all other accordions
+            allContents.forEach(c => {
+                if (c !== content) {
+                    c.style.maxHeight = "0";
+                }
+            });
+
+            // Reset all icons
+            allIcons.forEach(i => {
+                if (i !== icon) {
+                    i.textContent = "+";
+                }
+            });
+
+            // Toggle the clicked accordion
+            if (content.style.maxHeight === "0px" || content.style.maxHeight === "") {
+                content.style.maxHeight = content.scrollHeight + "px";
+                icon.textContent = "-";
+            } else {
+                content.style.maxHeight = "0";
+                icon.textContent = "+";
+            }
+        });
+    });
+
+    // Scroll Animation (Show when scrolling down, Hide when scrolling up)
+    document.addEventListener("DOMContentLoaded", function () {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.remove("opacity-0", "translate-y-10");
+                } else {
+                    entry.target.classList.add("opacity-0", "translate-y-10");
+                }
+            });
+        }, { threshold: 0.2 });
+
+        observer.observe(document.querySelector("[data-animate]"));
+    });
+</script>
+
+
+    
+
+<!-- Enrollment Section -->
+<section id="enrollment-section" class="bg-[#D94D66] text-white py-20 px-8 md:px-20 lg:flex lg:items-center lg:justify-between min-h-[750px]">
+    <!-- Left Content -->
+    <div class="lg:w-1/2 flex flex-col justify-center h-full text-center lg:text-left px-5 md:px-9 lg:px-12">
+        <h2 class="text-4xl md:text-5xl font-bold mb-4 opacity-0 translate-y-10 transition-all duration-700 ease-out" data-animate-bounce>
+            Ready to Enroll?
+        </h2>
+        <p class="text-lg mb-2 md:mb-4 opacity-0 translate-y-5 transition-all duration-700 ease-out" data-animate-fade>
+            Register with us now through WhatsApp!
+        </p>
+        <p class="italic mb-4 opacity-0 translate-y-5 transition-all duration-700 ease-out" data-animate-fade>
+            or need more information?
+        </p>
+
+        <!-- WhatsApp Button with Uiverse.io styling -->
+        <a href="https://wa.link/ox345g" target="_blank">
+            <button class="relative px-10 py-5 h-15 mt-7 rounded-lg bg-white isolation-auto z-10 border-1 border-teal-500 before:absolute before:w-full before:transition-all 
+            before:duration-700 before:hover:w-full hover:text-white before:-right-full before:hover:right-0 before:rounded-full before:bg-[#14B8A6] 
+            before:-z-10 before:aspect-square before:hover:scale-150 overflow-hidden before:hover:duration-700 inline-flex items-center 
+            justify-center px-4 py-3 text-lg font-semibold text-black bg-white border border-gray-200 rounded-lg shadow-sm gap-x-2 hover:bg-gray-50 
+            disabled:opacity-50 disabled:pointer-events-none opacity-0 translate-y-5 transition-all duration-700 ease-out" data-animate-fade>
+                Contact Us
+            </button>
+        </a>
+    </div>
+
+    <!-- Right Image -->
+    <div class="lg:w-1/2 mt-10 lg:mt-0 flex justify-center lg:justify-end">
+        <img src="image/motherandchild.jpg" 
+            alt="Mother and child learning" 
+            class="rounded-lg shadow-lg w-5/6 md:w-4/5 lg:w-auto max-w-[550px] lg:max-w-[600px] opacity-0 translate-x-10 transition-all duration-700 ease-out" data-animate-slide>
+    </div>
+</section>
+
+<script>
+    // Scroll Animation (Slide in, Bounce, and Fade Effects)
+    document.addEventListener("DOMContentLoaded", function () {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    if (entry.target.dataset.animateBounce !== undefined) {
+                        entry.target.classList.add("animate-bounce");
+                    }
+                    entry.target.classList.remove("opacity-0", "translate-y-10", "translate-y-5", "translate-x-10");
+                } else {
+                    entry.target.classList.add("opacity-0", "translate-y-10", "translate-y-5", "translate-x-10");
+                }
+            });
+        }, { threshold: 0.3 });
+
+        document.querySelectorAll("[data-animate-bounce], [data-animate-fade], [data-animate-slide]").forEach(el => observer.observe(el));
+    });
+</script>
+
+
+
+<!-- Footer Section -->
+<footer class="bg-gray-100 text-gray-700 py-16 px-6 md:px-16 w-full">
+    <div class="w-full">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-screen-xl mx-auto w-full">
+            <!-- Headquarters -->
+            <div>
+                <h3 class="font-bold text-lg">Headquarters</h3>
+                <p class="mt-2">No 23-02 Jalan Kolam Air 1,<br>Kampung Nong Chik, Johor Bahru, Johor</p>                <!-- Miss Fahar -->
+                <div class="mt-2 flex items-center space-x-2">
+                    <img src="image/phone.png" alt="Phone Icon" class="w-6 h-6">
+                    <a href="https://wa.link/wtzurs" target="_blank" class="no-underline text-black">
+                        +60 13 779 7956 (Miss Fahar)
+                    </a>
+                </div>
+
+                <!-- Miss Emma -->
+                <div class="mt-1 flex items-center space-x-2">
+                    <img src="image/phone.png" alt="Phone Icon" class="w-6 h-6">
+                    <a href="https://wa.link/ox345g" target="_blank" class="no-underline text-black">
+                        +60 11 140 7956 (Miss Emma)
+                    </a>
+                </div>
+
+                <!-- Email -->
+                <div class="mt-2 flex items-center space-x-2">
+                    <img src="image/email.png" alt="Email Icon" class="w-6 h-6">
+                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=alhakimeducationcentre@gmail.com"
+                    target="_blank" class="no-underline text-black">
+                        alhakimeducationcentre@gmail.com
+                    </a>
+                </div>
+            </div>
+
+
+
+            <!-- Operating Hours -->
+            <div class="md:pl-12">
+                <h3 class="font-bold text-lg">Operating Hours</h3>
+                <p class="mt-2"><strong>Monday to Friday:</strong> 7:00 AM - 6:00 PM</p>
+                
+                <div class="mt-3 space-y-1">
+                    <p class="font-semibold">🕒 Fullday</p>
+                    <p class="text-gray-700">7:00 AM - 6:00 PM</p>
+
+                    <p class="font-semibold mt-2">🕒 Halfday</p>
+                    <p class="text-gray-700">7:00 AM - 1:00 PM</p>
+                    <p class="text-gray-700">12:00 PM - 6:00 PM</p>
+                </div>
+            </div>
+
+            <!-- Company Links -->
+            <div class="md:pl-12">
+                <h3 class="font-bold text-lg">Company</h3>
+                <ul class="mt-2 space-y-1">
+                    <li><a href="#" class="hover:text-blue-600">About us</a></li>
+                    <li><a href="#" class="hover:text-blue-600">Location</a></li>
+                    <li><a href="#" class="hover:text-blue-600">Programmes</a></li>
+                </ul>
+            </div>
+
+            <!-- Career Section -->
+            <div>
+                <h3 class="font-bold text-lg">Career</h3>
+                <p class="mt-2">We are looking for passionate individuals who aspire to nurture young minds.</p>
+                <p class="mt-2">
+                    Interested? Send your resume via 
+                    <a href="https://wa.link/93i96p" target="_blank" class="font-bold text-blue-600">WhatsApp</a> 
+                    or 
+                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=alhakimeducationcentre@gmail.com&su=Career%20Opportunities" 
+                    target="_blank" class="font-bold text-blue-600">Email</a>.
+                </p>
+            </div>
+    </div>
+
+    <!-- Social & Footer Links -->
+    <div class="mt-12 flex flex-col items-center text-center text-sm w-full">
+        <!-- Social Media Links -->
+        <div class="flex space-x-4 mt-4">
+            <!-- WhatsApp -->
+            <a href="https://wa.link/a2dz3u" target="_blank" class="text-green-500 text-2xl">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+            
+            <!-- Facebook -->
+            <a href="https://www.facebook.com/alhakimeducationcentre" target="_blank" class="text-blue-600 text-2xl">
+                <i class="fab fa-facebook"></i>
+            </a>
+
+            <!-- Instagram -->
+            <a href="https://www.instagram.com/alhakimeducationcentre?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" class="text-pink-500 text-2xl">
+                <i class="fab fa-instagram"></i>
+            </a>
+
+            <!-- TikTok -->
+            <a href="https://www.tiktok.com/@alhakimeducationcenter?is_from_webapp=1&sender_device=pc" target="_blank" class="text-black text-2xl">
+                <i class="fab fa-tiktok"></i>
+            </a>
+        </div>  
+
+    
+        <p class="mt-4 w-full text-center">
+            &copy; 2025 Al Hakim Education Centre &bull;
+            <a href="#" class="hover:text-blue-600">Privacy</a> &bull;
+            <a href="#" class="hover:text-blue-600">Terms</a> &bull;
+            <a href="#" class="hover:text-blue-600">Sitemap</a>
+        </p>
+    </div>
+</footer>
+
+</body>
+</html>

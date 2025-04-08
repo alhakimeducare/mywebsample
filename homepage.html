@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'], // Set Poppins as default font
+                    },
+                },
+            },
+        };
+    </script>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+</head>
+<body class="font-sans">
+    <!-- Your content here -->
+</body>
+</html>
+
+<!-- Navbar -->
+<header class="bg-white py-4 shadow-md fixed top-0 left-0 w-full z-50">
+    <div class="container mx-auto flex justify-between items-center px-6">
+        <!-- Logo -->
+        <div class="flex items-center">
+            <img src="image/logo al hakim.jpg" alt="Al Hakim Education Centre Logo" class="h-12 w-auto">
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button id="menu-toggle" class="lg:hidden block text-blue-900 focus:outline-none">
+            <svg id="menu-icon" class="w-6 h-6 transition-transform duration-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-8 6h8" />
+            </svg>
+        </button>
+
+        <!-- Navigation Menu -->
+        <nav id="menu" class="hidden lg:flex space-x-8 text-lg">
+            <a href="homepage.html" class="nav-link relative text-black font-normal hover:text-blue-400 px-4 py-2 transition duration-300">Home</a>
+            <a href="Programmes.html" class="nav-link relative text-black font-normal hover:text-blue-400 px-4 py-2 transition duration-300">Programmes</a>
+            <a href="location.html" class="nav-link relative text-black font-normal hover:text-blue-400 px-4 py-2 transition duration-300">Location</a>
+            <a href="#" id="enroll-btn" class="nav-link bg-blue-900 text-white px-4 py-2 rounded-full font-semibold hover:bg-blue-700 transition duration-300">Enroll</a>
+        </nav>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden lg:hidden bg-white shadow-md">
+        <nav class="flex flex-col items-center space-y-4 py-4">
+            <a href="homepage.html" class="mobile-nav-link text-gray-600 font-semibold">Home</a>
+            <a href="Programmes.html" class="mobile-nav-link text-gray-600 font-semibold hover:text-blue-900">Programmes</a>
+            <a href="location.html" class="mobile-nav-link text-gray-600 font-semibold hover:text-blue-900">Location</a>
+            <a href="#" id="enroll-btn" class="bg-blue-900 text-white px-4 py-2 rounded-full font-semibold hover:bg-blue-700">Enroll</a>
+        </nav>
+    </div>
+
+    <button id="go-up-btn" class="hidden fixed bottom-5 right-5 bg-blue-900 text-white p-3 rounded-full shadow-md hover:bg-blue-700 transition duration-300 z-50">
+        &#8679;
+    </button>
+    
+    <script>
+        document.getElementById("enroll-btn").addEventListener("click", function (event) {
+            event.preventDefault(); // Prevent default link behavior
+            document.getElementById("enrollment-section").scrollIntoView({ behavior: "smooth" });
+        });
+
+        // Get the current page URL (case insensitive)
+        const currentPage = window.location.pathname.split("/").pop().toLowerCase();
+        console.log("Current Page:", currentPage); // Debugging
+
+        const navLinks = document.querySelectorAll(".nav-link");
+        const mobileNavLinks = document.querySelectorAll(".mobile-nav-link");
+
+        // Highlight the active link in the desktop navbar
+        navLinks.forEach(link => {
+            if (link.getAttribute("href").toLowerCase() === currentPage) {
+                link.classList.add("text-blue-400");
+                link.innerHTML += '<span class="absolute left-0 bottom-0 w-full h-1 bg-blue-400"></span>';
+            }
+        });
+
+        // Highlight the active link in the mobile menu
+        mobileNavLinks.forEach(link => {
+            if (link.getAttribute("href").toLowerCase() === currentPage) {
+                link.classList.add("text-blue-400");
+            }
+        });
+
+        // Mobile menu toggle animation
+        const menuToggle = document.getElementById("menu-toggle");
+        const menuIcon = document.getElementById("menu-icon");
+        const mobileMenu = document.getElementById("mobile-menu");
+        
+        menuToggle.addEventListener("click", function() {
+            mobileMenu.classList.toggle("hidden");
+            menuIcon.classList.toggle("rotate-90");
+            if (mobileMenu.classList.contains("hidden")) {
+                menuIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-8 6h8" />';
+            } else {
+                menuIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />';
+            }
+        });
+
+        // Go Up Button Functionality
+        const goUpBtn = document.getElementById("go-up-btn");
+        window.addEventListener("scroll", function () {
+            if (window.scrollY > 200) {
+                goUpBtn.classList.remove("hidden");
+            } else {
+                goUpBtn.classList.add("hidden");
+            }
+        });
+
+        goUpBtn.addEventListener("click", function () {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+    </script>
+</header>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const boxes = document.querySelectorAll(".box");
+        
+        boxes.forEach((box) => {
+            box.addEventListener("mouseenter", () => {
+                boxes.forEach((b) => {
+                    if (b !== box) {
+                        b.classList.add("opacity-40"); // Dim other cards
+                    }
+                });
+            });
+    
+            box.addEventListener("mouseleave", () => {
+                boxes.forEach((b) => {
+                    b.classList.remove("opacity-40"); // Reset opacity
+                });
+            });
+        });
+    });
+    </script>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const testimonials = [
+                {
+                    name: "Jack",
+                    job: "Software Engineer",
+                    feedback: "I've never seen anything like this before. It's amazing. I love it.",
+                    img: "https://i.pravatar.cc/100?img=1"
+                },
+                {
+                    name: "Jill",
+                    job: "Product Manager",
+                    feedback: "This has completely changed the way I work. Incredible!",
+                    img: "https://i.pravatar.cc/100?img=2"
+                },
+                {
+                    name: "John",
+                    job: "Designer",
+                    feedback: "A beautiful experience. Highly recommend to everyone.",
+                    img: "https://i.pravatar.cc/100?img=3"
+                },
+                {
+                    name: "Jane",
+                    job: "Marketing Specialist",
+                    feedback: "Amazing product! I'm so happy with the results.",
+                    img: "https://i.pravatar.cc/100?img=4"
+                }
+            ];
+        
+            const marqueeContainer = document.getElementById("marquee");
+        
+            testimonials.forEach(testimonial => {
+                const testimonialCard = document.createElement("div");
+                testimonialCard.className = "bg-white p-6 rounded-lg shadow-lg w-64 flex-none";
+        
+                testimonialCard.innerHTML = `
+                    <div class="flex items-center mb-2">
+                        <div class="text-yellow-400 text-xl">★★★★★</div>
+                    </div>
+                    <p class="text-gray-700 mb-4">${testimonial.feedback}</p>
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 bg-gray-300 rounded-full overflow-hidden">
+                            <img src="${testimonial.img}" alt="User" class="w-full h-full object-cover">
+                        </div>
+                        <div class="ml-3">
+                            <p class="font-bold text-gray-900">${testimonial.name}</p>
+                            <p class="text-sm text-gray-500">${testimonial.job}</p>
+                        </div>
+                    </div>
+                `;
+        
+                marqueeContainer.appendChild(testimonialCard);
+            });
+        });
+        </script>
+        
+
+    <!-- Add margin-top to prevent content from being hidden behind navbar -->
+    <style>
+        body {
+            padding-top: 70px; /* Adjust based on your navbar height */
+        }
+    </style>
+
+<!-- Add margin-top to prevent content from being hidden behind navbar -->
+<style>
+    body {
+        padding-top: 70px; /* Adjust based on your navbar height */
+    }
+</style>
+    
+    <main class="bg-[#a1c8e1] py-0">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center px-6 lg:px-10">
+            <div class="md:w-1/2 text-center md:text-left mb-8 md:mb-0">
+                <h1 class="text-4xl md:text-5xl header-font mb-4">Welcome To Our<br>Childcare Centre</h1>
+                <p class="text-lg text-gray-700 mb-6">We believe in nurturing young<br>minds and fostering a safe environment.</p>
+                <a href="#" id="enroll-btn-main" class="bg-[#4ecdc4] text-white px-6 py-3 rounded-full hover:bg-green-500 mt-3 inline-block">
+                    Enroll Now
+                </a>                
+            </div>
+            <div class="md:w-1/2 flex justify-center">
+                <img src="image/model1.png" alt="Child holding a backpack" class="w-72 md:w-96 h-auto">
+            </div>
+        </div>
+
+        <script>
+            document.getElementById("enroll-btn-main").addEventListener("click", function (event) {
+                event.preventDefault(); // Prevent default link behavior
+                document.getElementById("enrollment-section").scrollIntoView({ behavior: "smooth" });
+            });
+        </script>
+        
+    </main>
+
+    <section class="bg-[#FFF7F2] flex justify-center items-center w-full min-h-[700px]  sm:px-10 lg:px-10 ">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center h-full gap-8">    
+    
+            <!-- Image Container -->
+            <div class="flex-shrink-0 mb-6 md:mb-0 translate-y-3 sm:translate-y-0">
+                <div class="rounded-full overflow-hidden border-8 border-[#FDD9B5] w-52 h-52 sm:w-72 sm:h-72 md:w-96 md:h-96">
+                    <img alt="A child smiling and waving, wearing a green and yellow outfit" 
+                         class="w-full h-full object-cover" 
+                         src="image/ammar.png" />
+                </div>
+            </div>
+    
+            <!-- Text Content -->
+            <div class="text-center md:text-left flex flex-col items-center md:items-start">
+                
+                <!-- About Us Header -->
+                <div class="flex items-center justify-center md:justify-start mb-2">
+                    <i class="fas fa-chevron-right text-black"></i>
+                    <span class="text-[#00C4CC] ml-2 font-semibold">About Us</span>
+                </div>
+                
+                <h1 class="text-4xl sm:text-3xl md:text-4xl font-bold mb-4">
+                    WHO IS <span class="text-[#00C4CC]">AL HAKIM EDUCATION CENTRE</span>
+                </h1>
+    
+                <p class="text-base sm:text-lg text-gray-700 mb-6 leading-relaxed">
+                    At AL Hakim Education Centre, we are dedicated to providing a safe, 
+                    nurturing, and enriching environment where children can learn, grow, 
+                    and explore their full potential with love and guidance.
+                </p>
+
+    
+<!-- Stats Section -->
+<div class="grid grid-cols-2 md:grid-cols-3 gap-6 w-full max-w-md md:max-w-none">
+    <div class="text-center">
+        <p class="text-3xl font-bold text-[#00C4CC]">
+            <span class="count" data-target="600">0</span>+
+        </p>
+        <p class="text-lg text-gray-800">CHILD</p>
+    </div>
+    <div class="text-center">
+        <p class="text-3xl font-bold text-[#00C4CC]">
+            <span class="count" data-target="3">0</span>+
+        </p>
+        <p class="text-lg text-gray-800">BRANCH</p>
+    </div>
+    <div class="text-center col-span-2 md:col-span-1 mt-[-10px] sm:mt-0">
+        <p class="text-3xl font-bold text-[#00C4CC]">
+            <span class="count" data-target="10">0</span>+
+        </p>
+        <p class="text-lg text-gray-800">YEARS OF EXPERIENCE</p>
+    </div>
+</div>
+
+<!-- JavaScript for Scroll-Triggered Count-Up Animation -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const counters = document.querySelectorAll(".count");
+        let counted = false; // Ensures animation runs only once
+
+        function startCounting() {
+            counters.forEach((counter) => {
+                const target = +counter.getAttribute("data-target");
+                let count = 0;
+                const duration = 1500; // ⏳ Total duration in milliseconds (increase for slower speed)
+                const interval = 10; // ⏳ Interval per update in milliseconds (higher = slower updates)
+                const steps = duration / interval; // Total steps
+                const increment = target / steps; // Smaller increments for smoother animation
+
+                function updateCount() {
+                    count += increment;
+                    if (count < target) {
+                        counter.textContent = Math.ceil(count);
+                        setTimeout(updateCount, interval); // Use setTimeout for better control
+                    } else {
+                        counter.textContent = target; // Ensure exact final value
+                    }
+                }
+
+                updateCount();
+            });
+        }
+
+        // Ensure correct section selection (escaped Tailwind class)
+        const section = document.querySelector(".bg-\\[\\#FFF7F2\\]");
+
+        if (!section) {
+            console.error("Section not found! Check the class name.");
+            return;
+        }
+
+        // Intersection Observer to trigger counting when section is visible
+        const observer = new IntersectionObserver(
+            (entries) => {
+                if (entries[0].isIntersecting && !counted) {
+                    startCounting();
+                    counted = true;
+                    observer.disconnect(); // Stop observing once started
+                }
+            },
+            { threshold: 0.3 } // 30% of the section must be visible
+        );
+
+        observer.observe(section);
+    });
+</script>
+
+
+
+                    
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    
+
+  <!-- Categories Section -->
+  <section class="bg-yellow-100 text-center py-8">
+    <h1 id="categories" class="text-3xl font-bold">CATEGORIES</h1>
+</section>
+
+<section class="bg-[#d8f1ff] w-full px-10 py-10">
+    <div class="text-center mb-8"> <!-- Center text -->
+        <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-bold text-gray-800">What we offer?</h2>
+        <p class="text-gray-600 mt-2">
+            Tailored programs designed to nurture every stage of childhood, fostering growth,<br> 
+            creativity, and confidence in a safe and loving environment.
+        </p>
+    </div>
+
+    <!-- Center the Card Section -->
+    <div class="flex justify-center">
+        <div class="container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+            <div class="box bg-white rounded-lg shadow-md overflow-hidden flex flex-col h-[450px] transition-opacity duration-500 opacity-100 hover:opacity-100 hover:brightness-100"
+                onmouseover="dimOthers(this)" onmouseout="resetOpacity()">
+                <img src="image/baby.jpg" alt="Baby program" class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <h3 class="text-3xl font-bold text-gray-800">Little Owl</h3>
+                    <p class="text-gray-600 mt-4">Baby starting from age 3 - 12 months</p>
+                    <button onclick="window.location.href='Programmes.html#Programmes'" class="mt-28 bg-teal-500 text-white px-4 py-2 rounded">Learn more</button>
+                </div>
+            </div>
+
+            <div class="box bg-white rounded-lg shadow-md overflow-hidden flex flex-col h-[450px] transition-opacity duration-500 opacity-100 hover:opacity-100 hover:brightness-100"
+                onmouseover="dimOthers(this)" onmouseout="resetOpacity()">
+                <img src="image/tinytots.jpg" alt="Toddler program" class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <h3 class="text-3xl font-bold text-gray-800">Tiny Tots</h3>
+                    <p class="text-gray-600 mt-4">Child age 1 year old</p>
+                    <button onclick="window.location.href='Programmes.html#Programmes'" class="mt-28 bg-teal-500 text-white px-4 py-2 rounded">Learn more</button>
+                </div>
+            </div>
+
+            <div class="box bg-white rounded-lg shadow-md overflow-hidden flex flex-col h-[450px] transition-opacity duration-500 opacity-100 hover:opacity-100 hover:brightness-100"
+                onmouseover="dimOthers(this)" onmouseout="resetOpacity()">
+                <img src="image/awesome kid.jpg" alt="Child painting" class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <h3 class="text-3xl font-bold text-gray-800">Awesome Kids</h3>
+                    <p class="text-gray-600 mt-4">Child age 2 years old</p>
+                    <button onclick="window.location.href='Programmes.html#Programmes'" class="mt-28 bg-teal-500 text-white px-4 py-2 rounded">Learn more</button>
+                </div>
+            </div>
+
+            <div class="box bg-white rounded-lg shadow-md overflow-hidden flex flex-col h-[450px] transition-opacity duration-500 opacity-100 hover:opacity-100 hover:brightness-100"
+                onmouseover="dimOthers(this)" onmouseout="resetOpacity()">
+                <img src="image/kid.jpg" alt="Child drawing" class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <h3 class="text-3xl font-bold text-gray-800">Amazing Kids</h3>
+                    <p class="text-gray-600 mt-4">Child age 3 & 4 years old</p>
+                    <button onclick="window.location.href='Programmes.html#Programmes'" class="mt-28 bg-teal-500 text-white px-4 py-2 rounded">Learn more</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+    
+
+ <!-- Mission & Vision Section -->
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+ <!-- AOS (Animate On Scroll) CDN -->
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+
+    <!-- Our Mission & Vision Section -->
+    <section class="bg-[#fff6ee] min-h-screen flex flex-col items-center justify-center p-8 space-y-16">
+      
+        <!-- Vision Section -->
+        <div class="flex flex-col md:flex-row items-center md:justify-between w-full max-w-5xl md:gap-12 opacity-0 transition-opacity duration-1000 section">
+            <!-- Text (Left) -->
+            <div class="text-center md:text-left md:w-1/2">
+                <h1 class="text-black text-4xl font-bold mb-4 text-center">Vision</h1>
+                <p class="text-black text-lg text-center">
+                    Creating a conductable environment to enhance children's early development holistically includes six GEM early development areas: physical, intellect, language, emotional, social development, and morals.                </p>
+            </div>
+            
+            <!-- Image (Right) -->
+            <div class="md:w-1/2 flex justify-center md:justify-end mt-8 md:mt-0">
+                <img 
+                    src="https://storage.googleapis.com/a1aa/image/-i0wN0ru_p76H8SR76GzU8DvXAesFlSZIhsMO3AEibg.jpg" 
+                    loading="lazy"
+                    alt="Vision image" 
+                    class="rounded-xl shadow-lg w-full max-w-lg h-auto aspect-[16/9] object-cover transition-transform duration-300 hover:scale-105"
+                />
+            </div>
+        </div>
+
+        <!-- Mission Section -->
+        <div class="flex flex-col md:flex-row items-center md:justify-between w-full max-w-5xl md:gap-12 opacity-0 transition-opacity duration-1000 section">
+            <!-- Image (Left) -->
+            <div class="md:w-1/2 flex justify-center md:justify-start mb-8 md:mb-0">
+                <img 
+                    src="https://images.pexels.com/photos/3747519/pexels-photo-3747519.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=279.825&fit=crop&h=453.05" 
+                    loading="lazy"
+                    alt="Mission image" 
+                    class="rounded-xl shadow-lg w-full max-w-lg h-auto aspect-[16/9] object-cover transition-transform duration-300 hover:scale-105"
+                />
+            </div>
+
+            <!-- Text (Right) -->
+            <div class="text-center md:text-left md:w-1/2">
+                <h1 class="text-black text-4xl font-bold mb-4 text-center">Mission</h1>
+                <p class="text-black text-lg text-center">
+                    Providing quality learning independently through play in parallel with the national curriculum concept, in addition to providing an interactive, clean, and safe environment for children. We also provide trained and qualified educators and apply pure values in child care.                </p>
+            </div>
+        </div>
+
+    </section>
+
+     <!-- kak fahar & kak emma -->
+
+     <!-- Animate.css & AOS (Animate On Scroll) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+
+<style>
+    /* Floating Animation for Circles */
+    @keyframes float {
+        0% { transform: translateY(0px); }
+        50% { transform: translateY(-20px); }
+        100% { transform: translateY(0px); }
+    }
+
+    .floating {
+        animation: float 5s ease-in-out infinite;
+    }
+
+    /* Initial Hidden State */
+    .section {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 1s ease-out, transform 1s ease-out;
+    }
+
+    .visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+</style>
+
+<div class=" bg-[#d8f1ff] flex justify-center items-center w-full min-h-screen px-4 sm:px-0 lg:px-10 relative">
+    <div class="flex flex-col md:flex-row items-center justify-between w-full max-w-6xl mx-auto">
+        
+        <!-- Left Side - Text Content -->
+        <div class="text-left w-full md:w-1/2 md:-translate-x-10 lg:-translate-x-24 section">
+            <h1 class="title text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-bold text-gray-800 leading-tight animate__animated">
+                Best Center <br/> For Your <span class="text-teal-400">Child</span>
+            </h1>
+            <p class="mt-4 text-gray-600 text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl">
+                Where every child is valued, learning is exciting, and growth<br class="hidden sm:block"> 
+                happens every day in a safe and loving environment.
+            </p>
+            <button class="mt-6 px-8 py-3 bg-blue-600 text-white text-lg rounded-full hover:bg-blue-700 transition transform hover:scale-105">
+                Contact Us
+            </button>
+        </div>
+
+        <!-- Right Side - Images -->
+        <div class="relative w-full md:w-1/2 flex flex-col sm:flex-row justify-center items-center mt-10 md:mt-0 space-x-0 sm:space-x-4">
+
+            <!-- First Image -->
+            <div class="relative transform -translate-y-6 sm:-translate-y-14 section">
+                <div class="absolute -top-6 -right-6 sm:-right-16 bg-black text-white px-3 py-1 rounded-lg shadow-lg text-xs sm:text-sm">
+                    <p>Every child deserves a champion</p>
+                </div>
+                <div class="rounded-full overflow-hidden border-4 border-black shadow-lg w-32 sm:w-44 md:w-56 transform transition-transform duration-300 hover:scale-110">
+                    <img src="image/kak fahar (1).png" loading="lazy" alt="Portrait 1" class="w-full"/>
+                </div>
+            </div>
+
+            <!-- Second Image -->
+            <div class="relative top-2 mt-6 sm:mt-10 section">
+                <div class="absolute -top-4 -left-4 sm:-left-8 bg-black text-white px-3 py-1 rounded-lg shadow-lg text-xs sm:text-sm">
+                    <p>Safe!</p>
+                </div>
+                <div class="rounded-full overflow-hidden border-4 border-black shadow-lg w-32 sm:w-44 md:w-56 transform transition-transform duration-300 hover:scale-110">
+                    <img src="image/kak emma.png" loading="lazy"  alt="Portrait 2" class="w-full"/>
+                </div>
+            </div>
+
+            <!-- Teal Circle (Floating Effect) -->
+            <div class="w-14 sm:w-20 md:w-28 h-14 sm:h-20 md:h-28 bg-teal-400 rounded-full absolute top-48 sm:top-64 left-1/4 sm:left-1/3 transform -translate-x-1/2 floating"></div>
+
+            <!-- Blue Circle (Floating Effect) -->
+            <div class="w-16 sm:w-24 md:w-36 h-16 sm:h-24 md:h-36 bg-blue-200 rounded-full absolute 
+            top-56 sm:top-80 left-5 sm:left-20 md:left-40 lg:left-2 floating"></div>
+
+        </div>
+    </div>
+
+    <!-- Floating Background Circles -->
+    <div class="w-24 sm:w-36 md:w-48 h-24 sm:h-36 md:h-48 bg-teal-400 rounded-full absolute top-10 sm:top-20 right-6 sm:right-24 floating"></div>
+
+    <div class="w-10 sm:w-16 md:w-20 h-10 sm:h-16 md:h-20 bg-blue-600 rounded-full absolute 
+    top-32 sm:top-40 left-80 sm:left-auto md:right-80 floating"></div>
+</div>
+
+<!-- AOS & Intersection Observer Script -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Initialize AOS
+        AOS.init({
+            duration: 1000, // Animation duration (1 second)
+            once: true, // Animation only runs once
+        });
+
+        // Intersection Observer for Fade-in Effect
+        const sections = document.querySelectorAll('.section');
+
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible', 'animate_animated', 'animate_fadeInUp');
+                }
+            });
+        }, { threshold: 0.3 });
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+    });
+</script>
+
+  
+<!-- Customer Feedback Section -->
+<section class="bg-[#fff6ee] py-16">
+    <div class="max-w-6xl mx-auto text-center">
+        <h2 class="text-black text-4xl font-bold mb-10">Customer Feedback</h2>
+
+        <!-- Marquee Container -->
+        <div class="relative w-full overflow-hidden space-y-6 flex flex-col items-start">
+
+            
+            <!-- Top Row (Moves Right) -->
+            <div class="flex space-x-6 animate-marquee-right min-w-max">
+                <div class="flex space-x-6">
+                    <div class="testimonial-card"> 
+                        <div class="avatar bg-gradient-to-r from-green-400 to-blue-500"></div>
+                        <div>
+                            <p class="font-bold">Haikal</p>
+                            <p class="text-sm text-gray-500">@kalk</p>
+                        </div>
+                        <p class="text-gray-700 mt-2">"Teacher dia semua peramah"</p>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <div class="avatar bg-gradient-to-r from-yellow-400 to-pink-500"></div>
+                        <div>
+                            <p class="font-bold">Ziqri Furqan</p>
+                            <p class="text-sm text-gray-500">@ziqri</p>
+                        </div>
+                        <p class="text-gray-700 mt-2">"Cikgu-cikgu selalu update info tentang keadaan anak & aktiviti anak."</p>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <div class="avatar bg-gradient-to-r from-green-400 to-blue-500"></div>
+                        <div>
+                            <p class="font-bold">Iffat</p>
+                            <p class="text-sm text-gray-500">@iffat</p>
+                        </div>
+                        <p class="text-gray-700 mt-2">"Terdapat program-program yang menarik disediakan untuk anak-anak."</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Row (Moves Left) -->
+            <div class="flex space-x-6 animate-marquee-left min-w-max">
+                <div class="flex space-x-6">
+                    <div class="testimonial-card">
+                        <div class="avatar bg-gradient-to-r from-purple-400 to-red-500"></div>
+                        <div>
+                            <p class="font-bold">Hisham</p>
+                            <p class="text-sm text-gray-500">@hisham</p>
+                        </div>
+                        <p class="text-gray-700 mt-2">"Mulanya hantar atas rekomendasi dari rakan sekerja. Saya juga tertarik dengan posting Al Hakim yang banyak berkongsi aktiviti anak-anak setiap hari."</p>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <div class="avatar bg-gradient-to-r from-blue-400 to-green-500"></div>
+                        <div>
+                            <p class="font-bold">Aina</p>
+                            <p class="text-sm text-gray-500">@aina</p>
+                        </div>
+                        <p class="text-gray-700 mt-2">"Kami menghantar anak dari umur 3 bulan sampai sekarang dan kami melihat banyak perkembang positif pada anak kami."</p>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <div class="avatar bg-gradient-to-r from-pink-400 to-yellow-500"></div>
+                        <div>
+                            <p class="font-bold">Karl</p>
+                            <p class="text-sm text-gray-500">@karl</p>
+                        </div>
+                        <p class="text-gray-700 mt-2">"Pada tahun pertama kami menghantar ammar,nampak perubahan dia, dah kenal nombor, dahberani mencuba benda baru, sebab tu saya ambik keputusan untuk  hantar dia untuk tahun kedua."</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Tailwind Custom Styles -->
+<style>
+    /* Animations */
+    @keyframes marquee-right {
+        from { transform: translateX(-100%); }
+        to { transform: translateX(100%); }
+    }
+    @keyframes marquee-left {
+        from { transform: translateX(100%); }
+        to { transform: translateX(-100%); }
+    }
+
+    /* Apply Animation */
+    .animate-marquee-right {
+        animation: marquee-right 15s linear infinite;
+    }
+    .animate-marquee-left {
+        animation: marquee-left 15s linear infinite;
+    }
+
+    /* Testimonial Card */
+    .testimonial-card {
+        background: white;
+        width: 280px;
+        padding: 16px;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        display: inline-block;
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+    }
+
+    /* Avatar */
+    .avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        margin-bottom: 8px;
+    }
+</style>
+
+
+
+
+
+
+
+
+
+
+<!-- Enrollment Section -->
+<section id="enrollment-section" class="bg-[#D94D66] text-white py-20 px-8 md:px-20 lg:flex lg:items-center lg:justify-between min-h-[750px]">
+    <!-- Left Content -->
+    <div class="lg:w-1/2 flex flex-col justify-center h-full text-center lg:text-left px-5 md:px-9 lg:px-12">
+        <h2 class="text-4xl md:text-5xl font-bold mb-4 opacity-0 translate-y-10 transition-all duration-700 ease-out" data-animate-bounce>
+            Ready to Enroll?
+        </h2>
+        <p class="text-lg mb-2 md:mb-4 opacity-0 translate-y-5 transition-all duration-700 ease-out" data-animate-fade>
+            Register with us now through WhatsApp!
+        </p>
+        <p class="italic mb-4 opacity-0 translate-y-5 transition-all duration-700 ease-out" data-animate-fade>
+            or need more information?
+        </p>
+
+        <!-- WhatsApp Button with Uiverse.io styling -->
+        <a href="https://wa.link/ox345g" target="_blank">
+            <button class="relative px-10 py-5 h-15 mt-7 rounded-lg bg-white isolation-auto z-10 border-1 border-teal-500 before:absolute before:w-full before:transition-all 
+            before:duration-700 before:hover:w-full hover:text-white before:-right-full before:hover:right-0 before:rounded-full before:bg-[#14B8A6] 
+            before:-z-10 before:aspect-square before:hover:scale-150 overflow-hidden before:hover:duration-700 inline-flex items-center 
+            justify-center px-4 py-3 text-lg font-semibold text-black bg-white border border-gray-200 rounded-lg shadow-sm gap-x-2 hover:bg-gray-50 
+            disabled:opacity-50 disabled:pointer-events-none opacity-0 translate-y-5 transition-all duration-700 ease-out" data-animate-fade>
+                Contact Us
+            </button>
+        </a>
+    </div>
+
+    <!-- Right Image -->
+    <div class="lg:w-1/2 mt-10 lg:mt-0 flex justify-center lg:justify-end">
+        <img src="image/motherandchild.jpg" 
+            loading="lazy"
+            alt="Mother and child learning" 
+            class="rounded-lg shadow-lg w-5/6 md:w-4/5 lg:w-auto max-w-[550px] lg:max-w-[600px] opacity-0 translate-x-10 transition-all duration-700 ease-out" data-animate-slide>
+    </div>
+</section>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    if (entry.target.dataset.animateBounce !== undefined) {
+                        entry.target.classList.add("animate-bounce");
+                    }
+                    entry.target.classList.remove("opacity-0", "translate-y-10", "translate-y-5", "translate-x-10");
+                } else {
+                    entry.target.classList.add("opacity-0", "translate-y-10", "translate-y-5", "translate-x-10");
+                }
+            });
+        }, { threshold: 0.3 });
+
+        document.querySelectorAll("[data-animate-bounce], [data-animate-fade], [data-animate-slide]").forEach(el => observer.observe(el));
+    });
+</script>
+
+
+
+<!-- Footer Section -->
+<footer class="bg-gray-100 text-gray-700 py-16 px-6 md:px-16 w-full">
+    <div class="w-full">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-screen-xl mx-auto w-full">
+            <!-- Headquarters -->
+            <div>
+                <h3 class="font-bold text-lg">Headquarters</h3>
+                <p class="mt-2">No 23-02 Jalan Kolam Air 1,<br>Kampung Nong Chik, Johor Bahru, Johor</p>                <!-- Miss Fahar -->
+                <div class="mt-2 flex items-center space-x-2">
+                    <img src="image/phone.png" alt="Phone Icon" class="w-6 h-6">
+                    <a href="https://wa.link/wtzurs" target="_blank" class="no-underline text-black">
+                        +60 13 779 7956 (Miss Fahar)
+                    </a>
+                </div>
+
+                <!-- Miss Emma -->
+                <div class="mt-1 flex items-center space-x-2">
+                    <img src="image/phone.png" alt="Phone Icon" class="w-6 h-6">
+                    <a href="https://wa.link/ox345g" target="_blank" class="no-underline text-black">
+                        +60 11 140 7956 (Miss Emma)
+                    </a>
+                </div>
+
+                <!-- Email -->
+                <div class="mt-2 flex items-center space-x-2">
+                    <img src="image/email.png" alt="Email Icon" class="w-6 h-6">
+                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=alhakimeducationcentre@gmail.com"
+                    target="_blank" class="no-underline text-black">
+                        alhakimeducationcentre@gmail.com
+                    </a>
+                </div>
+            </div>
+
+
+
+            <!-- Operating Hours -->
+            <div class="md:pl-12">
+                <h3 class="font-bold text-lg">Operating Hours</h3>
+                <p class="mt-2"><strong>Monday to Friday:</strong> 7:00 AM - 6:00 PM</p>
+                
+                <div class="mt-3 space-y-1">
+                    <p class="font-semibold">🕒 Fullday</p>
+                    <p class="text-gray-700">7:00 AM - 6:00 PM</p>
+
+                    <p class="font-semibold mt-2">🕒 Halfday</p>
+                    <p class="text-gray-700">7:00 AM - 1:00 PM</p>
+                    <p class="text-gray-700">12:00 PM - 6:00 PM</p>
+                </div>
+            </div>
+
+            <!-- Company Links -->
+            <div class="md:pl-12">
+                <h3 class="font-bold text-lg">Company</h3>
+                <ul class="mt-2 space-y-1">
+                    <li><a href="#" class="hover:text-blue-600">About us</a></li>
+                    <li><a href="#" class="hover:text-blue-600">Location</a></li>
+                    <li><a href="#" class="hover:text-blue-600">Programmes</a></li>
+                </ul>
+            </div>
+
+            <!-- Career Section -->
+            <div>
+                <h3 class="font-bold text-lg">Career</h3>
+                <p class="mt-2">We are looking for passionate individuals who aspire to nurture young minds.</p>
+                <p class="mt-2">
+                    Interested? Send your resume via 
+                    <a href="https://wa.link/93i96p" target="_blank" class="font-bold text-blue-600">WhatsApp</a> 
+                    or 
+                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=alhakimeducationcentre@gmail.com&su=Career%20Opportunities" 
+                    target="_blank" class="font-bold text-blue-600">Email</a>.
+                </p>
+            </div>
+    </div>
+
+    <!-- Social & Footer Links -->
+    <div class="mt-12 flex flex-col items-center text-center text-sm w-full">
+        <!-- Social Media Links -->
+        <div class="flex space-x-4 mt-4">
+            <!-- WhatsApp -->
+            <a href="https://wa.link/a2dz3u" target="_blank" class="text-green-500 text-2xl">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+            
+            <!-- Facebook -->
+            <a href="https://www.facebook.com/alhakimeducationcentre" target="_blank" class="text-blue-600 text-2xl">
+                <i class="fab fa-facebook"></i>
+            </a>
+
+            <!-- Instagram -->
+            <a href="https://www.instagram.com/alhakimeducationcentre?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" class="text-pink-500 text-2xl">
+                <i class="fab fa-instagram"></i>
+            </a>
+
+            <!-- TikTok -->
+            <a href="https://www.tiktok.com/@alhakimeducationcenter?is_from_webapp=1&sender_device=pc" target="_blank" class="text-black text-2xl">
+                <i class="fab fa-tiktok"></i>
+            </a>
+        </div>  
+
+    
+        <p class="mt-4 w-full text-center">
+            &copy; 2025 Al Hakim Education Centre &bull;
+            <a href="#" class="hover:text-blue-600">Privacy</a> &bull;
+            <a href="#" class="hover:text-blue-600">Terms</a> &bull;
+            <a href="#" class="hover:text-blue-600">Sitemap</a>
+        </p>
+    </div>
+</footer>
+
+
+
+  
+</body>
+</html>

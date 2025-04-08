@@ -1,0 +1,41 @@
+@import "tailwindcss";
+@import CountUp from './CountUp'
+
+<CountUp
+  from={0}
+  to={100}
+  separator=","
+  direction="up"
+  duration={1}
+  className="count-up-text"
+/>  
+@plugin "daisyui";
+@keyframes marquee-right {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes marquee-left {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+.animate-marquee-right {
+  animation: marquee-right 15s linear infinite;
+}
+
+.animate-marquee-left {
+  animation: marquee-left 15s linear infinite;
+}
+import { RetroGrid } from "@/registry/magicui/retro-grid";
+
+  
+  
